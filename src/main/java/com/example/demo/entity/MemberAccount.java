@@ -11,25 +11,26 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
-@Entity
-@Table(name = "member_account")
+//@Getter
+//@Setter
+//@ToString
+//@Entity
+//@Table(name = "member_account")
 public class MemberAccount extends Base {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long id;
-
-	@Column(name = "USERNAME", unique = true)
-	private String username;
-
-	@Column(name = "PASSWORD")
-	private String password;
-
-	@Column(name = "SALT")
-	private String salt;
+//
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "ID")
+//	private Long id;
+//
+//	////unique開啟數據庫唯一約束
+//	@Column(name = "USERNAME", unique = true)
+//	private String username;
+//
+//	@Column(name = "PASSWORD")
+//	private String password;
+//
+//	@Column(name = "SALT")
+//	private String salt;
 
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <form @submit.prevent="reg">
+        帳號:<input type="text" v-model="account" placeholder="請輸入帳號">
+
+        密碼:<input type="password" v-model="password" placeholder="密碼">
+
+        用戶名:<input type="text" v-model="username" placeholder="用戶名">
+
+        email:<input type="text" v-model="email" placeholder="email">
+
+        <button type="submit">註冊</button>
+    </form>
+</div>
+</body>
+<!--引入Vue3-->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!--引入Axios-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    createApp({
+        data() {
+            return {
+                account: "",
+                password: "",
+                username: "",
+                email: ""
+            }
+        },
+        methods: {
+            reg() {
+                axios.post("http://localhost:8080/user/save", {
+                    account: this.account,
+                    password: this.password,
+                    username: this.username,
+                    email: this.email
+                })
+                    .then(res => {
+                        alert("註冊成功");
+                        console.log(res.data);
+                    })
+                    .catch(err => {
+                        alert("註冊失敗");
+                        console.error(err);
+                    });
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
