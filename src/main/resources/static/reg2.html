@@ -7,6 +7,7 @@
 <body>
 <div id="app">
     <form @submit.prevent="reg">
+        <!--v-model雙向綁定,會把數據綁定到下面的data裡面的k值-->
         帳號:<input type="text" v-model="account" placeholder="請輸入帳號">
         <br>
         密碼:<input type="password" v-model="password" placeholder="密碼">
@@ -16,7 +17,11 @@
         email:<input type="text" v-model="email" placeholder="email">
         <br>
         <button type="submit">註冊</button>
-        <div>{{info}}</div>
+
+        <!--單向綁定-->
+        <div style="color: red">{{info}}</div>
+        <br>
+        <div style="color: red">{{countdown}}</div>
     </form>
 </div>
 </body>
@@ -30,11 +35,12 @@
     createApp({
         data() {
             return {
-                account: "",
-                password: "",
-                username: "",
-                email: "",
-                info:""
+                account: "",     //雙向綁定
+                password: "",    //雙向綁定
+                username: "",    //雙向綁定
+                email: "",       //雙向綁定
+                info: "",        //單向綁定
+                countdown: ""     //倒數秒數
             }
         },
         methods: {
@@ -45,10 +51,32 @@
                     username: this.username,
                     email: this.email
                 }).then(res => {
-                        this.info="註冊成功"
+                    this.info = "註冊成功"
+                    //三秒後消失的方法
+                    this.countdown = 3; // 初始化 3 秒
+
+                    let timer = setInterval(() => {
+                        this.countdown--;
+                        if (this.countdown <= 0) {//判斷當秒數小於等於0時,將插植表達式 單向綁定數據為空
+                            clearInterval(timer);//清除
+                            this.info = "";//設置為空
+                            this.countdown="";//將時間設置為空
+                        }
+                    }, 1000);
                 }).catch(err => {
-                    this.info="註冊失敗"
-                    });
+                    this.info = "註冊失敗"
+                    //三秒後消失的方法
+                    this.countdown = 3; // 初始化 3 秒
+
+                    let timer = setInterval(() => {
+                        this.countdown--;
+                        if (this.countdown <= 0) {//判斷當秒數小於等於0時,將插植表達式 單向綁定數據為空
+                            clearInterval(timer);//清除
+                            this.info = "";//設置為空
+                            this.countdown="";//將時間設置為空
+                        }
+                    }, 1000);
+                });
             }
         }
     }).mount("#app");
