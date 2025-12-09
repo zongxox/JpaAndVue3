@@ -6,6 +6,7 @@
 </head>
 <body>
 <div id="app">
+<!--@submit.prevent="reg" 防止reg方法 自動送出表單-->
     <form @submit.prevent="reg">
         <!--v-model雙向綁定,會把數據綁定到下面的data裡面的k值-->
         帳號:<input type="text" v-model="account" placeholder="請輸入帳號">
