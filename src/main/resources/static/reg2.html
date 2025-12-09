@@ -30,26 +30,28 @@
 <!--引入Axios-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    //一個頁面只需要一個createApp
     const {createApp} = Vue;
-
     createApp({
+        //data 裡可以放當前頁面的前端變數名稱
         data() {
             return {
-                account: "",     //雙向綁定
-                password: "",    //雙向綁定
-                username: "",    //雙向綁定
-                email: "",       //雙向綁定
-                info: "",        //單向綁定
-                countdown: ""     //倒數秒數
+                account: "",     //雙向綁定,前端變數，會掛到 this.account，給 v-model 用,到axios使用的話就要用this.
+                password: "",    //雙向綁定,前端變數，會掛到 this.password，給 v-model 用,到axios使用的話就要用this.
+                username: "",    //雙向綁定,前端變數，會掛到 this.username，給 v-model 用,到axios使用的話就要用this.
+                email: "",       //雙向綁定,前端變數，會掛到 this.email，給 v-model 用,到axios使用的話就要用this.
+                info: "",        //單向綁定,前端變數，會掛到 this.info，給 v-model 用,到axios使用的話就要用this.
+                countdown: ""    //倒數秒數,前端變數，會掛到 this.countdown，給 v-model 用,到axios使用的話就要用this.
             }
         },
+        //一個createApp只能有一個 methods,但裡面可以有很多方法xxx(){},xxx(){}
         methods: {
             reg() {
                 axios.post("http://localhost:8080/user/save", {
-                    account: this.account,
-                    password: this.password,
-                    username: this.username,
-                    email: this.email
+                    account: this.account,   //後端屬性綁定前端
+                    password: this.password, //後端屬性綁定前端
+                    username: this.username, //後端屬性綁定前端
+                    email: this.email        //後端屬性綁定前端
                 }).then(res => {
                     this.info = "註冊成功"
                     //三秒後消失的方法
@@ -78,8 +80,8 @@
                     }, 1000);
                 });
             }
-        }
-    }).mount("#app");
+        }//reg結束
+    }).mount("#app");//createApp結束
 </script>
 
 </html>
