@@ -47,7 +47,7 @@
         //一個createApp只能有一個 methods,但裡面可以有很多方法xxx(){},xxx(){}
         methods: {
             reg() {
-                axios.post("http://localhost:8080/user/save", {
+                axios.post("/user/save", {
                     account: this.account,   //後端屬性綁定前端
                     password: this.password, //後端屬性綁定前端
                     username: this.username, //後端屬性綁定前端
