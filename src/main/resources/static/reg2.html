@@ -8,15 +8,15 @@
 <div id="app">
     <form @submit.prevent="reg">
         帳號:<input type="text" v-model="account" placeholder="請輸入帳號">
-
+        <br>
         密碼:<input type="password" v-model="password" placeholder="密碼">
-
+        <br>
         用戶名:<input type="text" v-model="username" placeholder="用戶名">
-
+        <br>
         email:<input type="text" v-model="email" placeholder="email">
-
+        <br>
         <button type="submit">註冊</button>
-        {{}}
+        <div>{{info}}</div>
     </form>
 </div>
 </body>
@@ -33,7 +33,8 @@
                 account: "",
                 password: "",
                 username: "",
-                email: ""
+                email: "",
+                info:""
             }
         },
         methods: {
@@ -44,11 +45,9 @@
                     username: this.username,
                     email: this.email
                 }).then(res => {
-                        alert("註冊成功");
-                        console.log(res.data);
+                        this.info="註冊成功"
                 }).catch(err => {
-                        alert("註冊失敗");
-                        console.error(err);
+                    this.info="註冊失敗"
                     });
             }
         }
