@@ -2,22 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>註冊</title>
+    <title>修改</title>
 </head>
 <body>
 <div id="app">
 <!--@submit.prevent="reg" 防止reg方法 自動送出表單-->
     <form @submit.prevent="reg">
         <!--v-model雙向綁定,會把數據綁定到下面的data裡面的k值-->
-        帳號:<input type="text" v-model="account" placeholder="請輸入帳號">
+        修改用戶名:<input type="text" v-model="username" placeholder="修改的用戶名">
         <br>
-        密碼:<input type="password" v-model="password" placeholder="密碼">
-        <br>
-        用戶名:<input type="text" v-model="username" placeholder="用戶名">
-        <br>
-        email:<input type="text" v-model="email" placeholder="email">
-        <br>
-        <button type="submit">註冊</button>
+        修改email:<input type="text" v-model="email" placeholder="修改的email">
+        <button type="submit">修改</button>
 
         <!--單向綁定-->
         <div style="color: red">{{info}}</div>
@@ -37,10 +32,8 @@
         //data 裡可以放當前頁面的前端變數名稱
         data() {
             return {
-                account: "",     //雙向綁定,前端變數，會掛到 this.account，給 v-model 用,到axios使用的話就要用this.
-                password: "",    //雙向綁定,前端變數，會掛到 this.password，給 v-model 用,到axios使用的話就要用this.
-                username: "",    //雙向綁定,前端變數，會掛到 this.username，給 v-model 用,到axios使用的話就要用this.
-                email: "",       //雙向綁定,前端變數，會掛到 this.email，給 v-model 用,到axios使用的話就要用this.
+                username: "",     //雙向綁定,前端變數，會掛到 this.account，給 v-model 用,到axios使用的話就要用this.
+                email: "",    //雙向綁定,前端變數，會掛到 this.password，給 v-model 用,到axios使用的話就要用this.
                 info: "",        //單向綁定,前端變數，會掛到 this.info，給 v-model 用,到axios使用的話就要用this.
                 countdown: ""    //倒數秒數,前端變數，會掛到 this.countdown，給 v-model 用,到axios使用的話就要用this.
             }
@@ -48,13 +41,11 @@
         //一個createApp只能有一個 methods,但裡面可以有很多方法xxx(){},xxx(){}
         methods: {
             reg() {
-                axios.post("/user/save", {
-                    account: this.account,   //後端屬性綁定前端
-                    password: this.password, //後端屬性綁定前端
-                    username: this.username, //後端屬性綁定前端
-                    email: this.email        //後端屬性綁定前端
+                axios.post("/user/update", {
+                    username: this.username,   //後端屬性綁定前端
+                    email: this.email, //後端屬性綁定前端
                 }).then(res => {
-                    this.info = "註冊成功"
+                    this.info = "修改成功"
                     //三秒後消失的方法
                     this.countdown = 3; // 初始化 3 秒
 
@@ -67,7 +58,7 @@
                         }
                     }, 1000);
                 }).catch(err => {
-                    this.info = "註冊失敗"
+                    this.info = "修改失敗"
                     //三秒後消失的方法
                     this.countdown = 3; // 初始化 3 秒
 

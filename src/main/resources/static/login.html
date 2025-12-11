@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>註冊</title>
+    <title>登入</title>
 </head>
 <body>
 <div id="app">
@@ -12,12 +12,7 @@
         帳號:<input type="text" v-model="account" placeholder="請輸入帳號">
         <br>
         密碼:<input type="password" v-model="password" placeholder="密碼">
-        <br>
-        用戶名:<input type="text" v-model="username" placeholder="用戶名">
-        <br>
-        email:<input type="text" v-model="email" placeholder="email">
-        <br>
-        <button type="submit">註冊</button>
+        <button type="submit">登入</button>
 
         <!--單向綁定-->
         <div style="color: red">{{info}}</div>
@@ -39,8 +34,6 @@
             return {
                 account: "",     //雙向綁定,前端變數，會掛到 this.account，給 v-model 用,到axios使用的話就要用this.
                 password: "",    //雙向綁定,前端變數，會掛到 this.password，給 v-model 用,到axios使用的話就要用this.
-                username: "",    //雙向綁定,前端變數，會掛到 this.username，給 v-model 用,到axios使用的話就要用this.
-                email: "",       //雙向綁定,前端變數，會掛到 this.email，給 v-model 用,到axios使用的話就要用this.
                 info: "",        //單向綁定,前端變數，會掛到 this.info，給 v-model 用,到axios使用的話就要用this.
                 countdown: ""    //倒數秒數,前端變數，會掛到 this.countdown，給 v-model 用,到axios使用的話就要用this.
             }
@@ -48,26 +41,14 @@
         //一個createApp只能有一個 methods,但裡面可以有很多方法xxx(){},xxx(){}
         methods: {
             reg() {
-                axios.post("/user/save", {
+                axios.post("/user/login", {
                     account: this.account,   //後端屬性綁定前端
                     password: this.password, //後端屬性綁定前端
-                    username: this.username, //後端屬性綁定前端
-                    email: this.email        //後端屬性綁定前端
                 }).then(res => {
-                    this.info = "註冊成功"
-                    //三秒後消失的方法
-                    this.countdown = 3; // 初始化 3 秒
-
-                    let timer = setInterval(() => {
-                        this.countdown--;
-                        if (this.countdown <= 0) {//判斷當秒數小於等於0時,將插植表達式 單向綁定數據為空
-                            clearInterval(timer);//清除
-                            this.info = "";//設置為空
-                            this.countdown="";//將時間設置為空
-                        }
-                    }, 1000);
+                    this.info = "登入成功"
+                    window.location.href="/updateUser.html"
                 }).catch(err => {
-                    this.info = "註冊失敗"
+                    this.info = "登入失敗"
                     //三秒後消失的方法
                     this.countdown = 3; // 初始化 3 秒
 
